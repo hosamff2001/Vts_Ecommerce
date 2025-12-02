@@ -1,22 +1,36 @@
-
-
-using System.Configuration;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace Vts_Ecommerce.DAL
 {
- 
+    /// <summary>
+    /// ADO.NET Database Helper Class
+    /// Provides methods for database operations using SqlConnection, SqlCommand, SqlDataReader
+    /// </summary>
     public static class AdoHelper
     {
+        private static string _connectionString;
+
+        /// <summary>
+        /// Initialize the connection string (call this in Program.cs)
+        /// </summary>
+        public static void Initialize(string connectionString)
+        {
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                throw new ArgumentException("Connection string cannot be null or empty", nameof(connectionString));
+            }
+            _connectionString = connectionString;
+        }
+
         private static string GetConnectionString()
         {
-            var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"];
-            if (connectionString == null)
+            if (string.IsNullOrWhiteSpace(_connectionString))
             {
-                throw new ConfigurationErrorsException("DefaultConnection connection string not found in Web.config");
+                throw new InvalidOperationException("AdoHelper has not been initialized. Call AdoHelper.Initialize() in Program.cs");
             }
-            return connectionString.ConnectionString;
+            return _connectionString;
         }
 
         
@@ -124,4 +138,5 @@ namespace Vts_Ecommerce.DAL
         }
     }
 }
+
 

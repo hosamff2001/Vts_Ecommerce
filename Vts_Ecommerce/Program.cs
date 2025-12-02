@@ -5,16 +5,24 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// add application db context
-var app = builder.Build();
-
-// Add session support
+// Add session support (MUST be registered before builder.Build())
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromHours(3); // 3-hour session timeout
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+// Build the application
+var app = builder.Build();
+
+// Initialize AdoHelper with connection string from configuration
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+if (string.IsNullOrWhiteSpace(connectionString))
+{
+    throw new InvalidOperationException("DefaultConnection connection string not found in appsettings.json");
+}
+AdoHelper.Initialize(connectionString);
 
 
 
@@ -30,6 +38,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+// Use session middleware (MUST be called after UseRouting and before UseAuthorization)
+app.UseSession();
 
 app.UseAuthorization();
 
