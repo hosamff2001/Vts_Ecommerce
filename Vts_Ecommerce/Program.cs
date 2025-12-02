@@ -1,13 +1,13 @@
+using Vts_Ecommerce.DAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// add application db context
 var app = builder.Build();
-// Add services to the container.
-builder.Services.AddDbContext<AdoHelper>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-    );
+
 // Add session support
 builder.Services.AddSession(options =>
 {

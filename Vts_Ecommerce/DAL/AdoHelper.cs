@@ -1,7 +1,8 @@
-using System;
+
+
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 namespace Vts_Ecommerce.DAL
 {
@@ -10,7 +11,7 @@ namespace Vts_Ecommerce.DAL
     {
         private static string GetConnectionString()
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"];
+            var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"];
             if (connectionString == null)
             {
                 throw new ConfigurationErrorsException("DefaultConnection connection string not found in Web.config");
