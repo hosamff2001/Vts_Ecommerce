@@ -1,4 +1,3 @@
-using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -7,10 +6,11 @@ namespace Vts_Ecommerce.DAL
     /// <summary>
     /// ADO.NET Database Helper Class
     /// Provides methods for database operations using SqlConnection, SqlCommand, SqlDataReader
+    /// Supports parameterized queries, and connection pooling
     /// </summary>
     public static class AdoHelper
     {
-        private static string _connectionString;
+        private static string? _connectionString;
 
         /// <summary>
         /// Initialize the connection string (call this in Program.cs)
@@ -33,13 +33,17 @@ namespace Vts_Ecommerce.DAL
             return _connectionString;
         }
 
-        
+        /// <summary>
+        /// Get a new SQL connection from the connection string
+        /// </summary>
         public static SqlConnection GetConnection()
         {
             return new SqlConnection(GetConnectionString());
         }
 
-       
+        /// <summary>
+        /// Execute a non-query command (INSERT, UPDATE, DELETE)
+        /// </summary>
         public static int ExecuteNonQuery(string commandText, CommandType commandType = CommandType.Text, params SqlParameter[] parameters)
         {
             using (var connection = GetConnection())
@@ -57,20 +61,35 @@ namespace Vts_Ecommerce.DAL
             }
         }
 
+        /// <summary>
+        /// Execute a query and return a SqlDataReader
+        /// Note: Caller must dispose the reader to close the connection
+        /// </summary>
         public static SqlDataReader ExecuteReader(string commandText, CommandType commandType = CommandType.Text, params SqlParameter[] parameters)
         {
             var connection = GetConnection();
-            connection.Open();
-            var command = new SqlCommand(commandText, connection);
-            command.CommandType = commandType;
-            if (parameters != null && parameters.Length > 0)
+            try
             {
-                command.Parameters.AddRange(parameters);
+                connection.Open();
+                var command = new SqlCommand(commandText, connection);
+                command.CommandType = commandType;
+                if (parameters != null && parameters.Length > 0)
+                {
+                    command.Parameters.AddRange(parameters);
+                }
+                // CommandBehavior.CloseConnection ensures connection closes when reader is disposed
+                return command.ExecuteReader(CommandBehavior.CloseConnection);
             }
-            // CommandBehavior.CloseConnection ensures connection closes when reader is disposed
-            return command.ExecuteReader(CommandBehavior.CloseConnection);
+            catch
+            {
+                connection?.Dispose();
+                throw;
+            }
         }
 
+        /// <summary>
+        /// Execute a scalar query (returns single value)
+        /// </summary>
         public static object ExecuteScalar(string commandText, CommandType commandType = CommandType.Text, params SqlParameter[] parameters)
         {
             using (var connection = GetConnection())
@@ -88,53 +107,68 @@ namespace Vts_Ecommerce.DAL
             }
         }
 
-        public static int ExecuteNonQueryWithTransaction(SqlTransaction transaction, string commandText, CommandType commandType = CommandType.Text, params SqlParameter[] parameters)
-        {
-            if (transaction == null)
-            {
-                throw new ArgumentNullException(nameof(transaction));
-            }
-
-            var command = new SqlCommand(commandText, transaction.Connection, transaction);
-            command.CommandType = commandType;
-            if (parameters != null && parameters.Length > 0)
-            {
-                command.Parameters.AddRange(parameters);
-            }
-            return command.ExecuteNonQuery();
-        }
-
+        /// <summary>
+        /// Create a SqlParameter with null handling
+        /// </summary>
         public static SqlParameter CreateParameter(string parameterName, object value, SqlDbType dbType)
         {
-            // Ensure parameter name starts with @
             if (!parameterName.StartsWith("@"))
             {
                 parameterName = "@" + parameterName;
             }
 
-            var parameter = new SqlParameter(parameterName, dbType);
-            parameter.Value = value ?? DBNull.Value;
+            var parameter = new SqlParameter(parameterName, dbType)
+            {
+                Value = value ?? DBNull.Value
+            };
             return parameter;
         }
 
+        /// <summary>
+        /// Create a SqlParameter with size constraint and null handling
+        /// </summary>
         public static SqlParameter CreateParameter(string parameterName, object value, SqlDbType dbType, int size)
         {
-            // Ensure parameter name starts with @
             if (!parameterName.StartsWith("@"))
             {
                 parameterName = "@" + parameterName;
             }
 
-            var parameter = new SqlParameter(parameterName, dbType, size);
-            parameter.Value = value ?? DBNull.Value;
+            var parameter = new SqlParameter(parameterName, dbType, size)
+            {
+                Value = value ?? DBNull.Value
+            };
             return parameter;
         }
 
-        public static SqlTransaction BeginTransaction()
+        /// <summary>
+        /// Create output parameter
+        /// </summary>
+        public static SqlParameter CreateOutputParameter(string parameterName, SqlDbType dbType)
         {
-            var connection = GetConnection();
-            connection.Open();
-            return connection.BeginTransaction();
+            if (!parameterName.StartsWith("@"))
+            {
+                parameterName = "@" + parameterName;
+            }
+
+            var parameter = new SqlParameter(parameterName, dbType)
+            {
+                Direction = ParameterDirection.Output
+            };
+            return parameter;
+        }
+
+        /// <summary>
+        /// Map SqlDataReader columns to a dictionary of column name to value
+        /// </summary>
+        public static Dictionary<string, object> MapReaderRow(SqlDataReader reader)
+        {
+            var row = new Dictionary<string, object>();
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                row[reader.GetName(i)] = reader.IsDBNull(i) ? null : reader.GetValue(i);
+            }
+            return row;
         }
     }
 }
