@@ -27,19 +27,15 @@ namespace Vts_Ecommerce.Models
         public DateTime InvoiceDate { get; set; } = DateTime.Now;
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
         public decimal SubTotal { get; set; } = 0;
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
         public decimal ItemDiscount { get; set; } = 0; // Sum of all item-level discounts
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
         public decimal InvoiceDiscount { get; set; } = 0; // Invoice-level discount
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
         public decimal Total { get; set; } = 0;
 
         [Required]

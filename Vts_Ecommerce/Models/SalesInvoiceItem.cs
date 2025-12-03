@@ -25,15 +25,12 @@ namespace Vts_Ecommerce.Models
         public int Quantity { get; set; } = 1;
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
         public decimal UnitPrice { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
         public decimal ItemDiscount { get; set; } = 0; // Per-item discount
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
         public decimal LineTotal { get; set; } // (Quantity * UnitPrice) - ItemDiscount
 
         // Navigation properties
