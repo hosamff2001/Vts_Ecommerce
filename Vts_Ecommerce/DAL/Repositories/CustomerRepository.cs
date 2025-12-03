@@ -160,6 +160,13 @@ namespace Vts_Ecommerce.DAL.Repositories
             return rowsAffected > 0;
         }
 
+        public int GetTotalCount()
+        {
+            string query = "SELECT COUNT(1) FROM Customers";
+            var result = AdoHelper.ExecuteScalar(query, CommandType.Text);
+            return Convert.ToInt32(result);
+        }
+
         /// <summary>
         /// Map SqlDataReader to Customer object
         /// </summary>

@@ -1,4 +1,5 @@
 using Vts_Ecommerce.DAL;
+using Vts_Ecommerce.DAL.DataSeeding;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,9 @@ if (string.IsNullOrWhiteSpace(connectionString))
     throw new InvalidOperationException("DefaultConnection connection string not found in appsettings.json");
 }
 AdoHelper.Initialize(connectionString);
+
+// Seed database with dummy data on startup
+DatabaseSeeder.SeedData();
 
 
 

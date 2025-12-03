@@ -229,6 +229,12 @@ namespace Vts_Ecommerce.DAL.Repositories
             }
             return false;
         }
+        public int GetTotalCount()
+        {
+            string query = "SELECT COUNT(1) FROM Products";
+            var result = AdoHelper.ExecuteScalar(query, CommandType.Text);
+            return Convert.ToInt32(result);
+        }
 
         /// <summary>
         /// Map SqlDataReader to Product object
@@ -246,5 +252,6 @@ namespace Vts_Ecommerce.DAL.Repositories
                 IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive"))
             };
         }
+
     }
 }

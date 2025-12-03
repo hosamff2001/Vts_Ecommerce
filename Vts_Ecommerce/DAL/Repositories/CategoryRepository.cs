@@ -60,7 +60,7 @@ namespace Vts_Ecommerce.DAL.Repositories
             return null;
         }
 
-       
+
         /// <summary>
         /// Update category information
         /// </summary>
@@ -94,7 +94,7 @@ namespace Vts_Ecommerce.DAL.Repositories
         /// <summary>
         /// Delete a category (hard delete - set IsActive to false)
         /// </summary>
-        public  bool Delete(int id)
+        public bool Delete(int id)
         {
             string query = @"
                 DELETE FROM Categories
@@ -118,6 +118,29 @@ namespace Vts_Ecommerce.DAL.Repositories
                 Description = reader.IsDBNull(2) ? null : reader.GetString(2),
                 IsActive = reader.GetBoolean(3)
             };
+        }
+
+        public int GetTotalCount()
+        {
+            string query = "SELECT COUNT(1) FROM Categories";
+            var result = AdoHelper.ExecuteScalar(query, CommandType.Text);
+            return Convert.ToInt32(result);
+        }
+        public List<Category> GetAll()
+        {
+            var categories = new List<Category>();
+            string query = @"
+                SELECT Id, Name, Description, IsActive
+                FROM Categories";
+
+            using (var reader = AdoHelper.ExecuteReader(query, CommandType.Text))
+            {
+                while (reader.Read())
+                {
+                    categories.Add(MapReader(reader));
+                }
+            }
+            return categories;
         }
     }
 }

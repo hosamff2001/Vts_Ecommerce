@@ -92,7 +92,8 @@ namespace Vts_Ecommerce.DAL.Repositories
 
             return ExecuteSingleQuery(query, parameters);
         }
-
+  
+       
      
         /// <summary>
         /// Execute a query that returns a single User row
@@ -123,6 +124,29 @@ namespace Vts_Ecommerce.DAL.Repositories
                 IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive")),
                 CreatedDate = reader.GetDateTime(reader.GetOrdinal("CreatedDate"))
             };
+        }
+
+        public int GetTotalCount()
+        {
+            string query = "SELECT COUNT(1) FROM Users";
+            var result = AdoHelper.ExecuteScalar(query, CommandType.Text);
+            return Convert.ToInt32(result);
+        }
+
+        public List<User> GetAll()
+        {
+            var users = new List<User>();
+            string query = @"
+                SELECT Id, Username, Password, Email, IsActive, CreatedDate
+                FROM Users";
+            using (var reader = AdoHelper.ExecuteReader(query, CommandType.Text))
+            {
+                while (reader.Read())
+                {
+                    users.Add(MapReader(reader));
+                }
+            }
+            return users;
         }
     }
 }
