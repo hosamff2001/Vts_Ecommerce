@@ -1,5 +1,6 @@
 using Vts_Ecommerce.DAL;
 using Vts_Ecommerce.DAL.DataSeeding;
+using Vts_Ecommerce.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +46,9 @@ app.UseRouting();
 
 // Use session middleware (MUST be called after UseRouting and before UseAuthorization)
 app.UseSession();
+
+// Use session validation middleware to check session validity on each request
+app.UseMiddleware<SessionValidationMiddleware>();
 
 app.UseAuthorization();
 

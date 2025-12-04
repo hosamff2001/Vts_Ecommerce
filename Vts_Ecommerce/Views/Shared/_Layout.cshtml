@@ -1,6 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Http
+@using Vts_Ecommerce.Helpers
+@{
+    var currentLanguage = LocalizationService.GetCurrentLanguage(Context);
+    var isRtl = LocalizationService.IsRtl(currentLanguage);
+    var direction = isRtl ? "rtl" : "ltr";
+}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="@currentLanguage" dir="@direction">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +14,7 @@
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/responsive.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Vts_Ecommerce.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -39,6 +46,17 @@
                     </ul>
 
                     <ul class="navbar-nav">
+                        <!-- Language Switcher -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown">
+                                @currentLanguage.ToUpper()
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                                <li><a class="dropdown-item" href="#" onclick="setLanguage('en')">English</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="setLanguage('ar')">العربية</a></li>
+                            </ul>
+                        </li>
+
                         @{
                             var username = Context.Session.GetString("Username");
                             if (!string.IsNullOrEmpty(username))
@@ -76,6 +94,22 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/idle-timeout.js" asp-append-version="true"></script>
+    <script>
+        // Language switcher
+        function setLanguage(lang) {
+            fetch('/Localization/SetLanguage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({ language: lang })
+            }).then(() => {
+                location.reload();
+            }).catch(err => console.error('Language change failed:', err));
+        }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

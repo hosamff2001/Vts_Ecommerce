@@ -1,0 +1,228 @@
+/* Responsive flexbox navigation with mobile/desktop icon ordering */
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* RTL support */
+body[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+body[dir="ltr"] {
+    direction: ltr;
+    text-align: left;
+}
+
+/* Navbar responsive */
+.navbar {
+    background-color: #f8f9fa;
+    padding: 1rem 0.5rem;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Main nav links */
+.navbar .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+/* User session info and logout */
+.navbar .navbar-nav.ms-auto {
+    margin-left: auto !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .navbar .navbar-nav {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .nav-link {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .navbar .navbar-nav.ms-auto {
+        order: 2;
+        width: 100%;
+        margin-top: 0.5rem;
+        border-top: 1px solid #dee2e6;
+        padding-top: 0.5rem;
+    }
+}
+
+/* Flexbox icon ordering - different on mobile */
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* Desktop: icons before text */
+@media (min-width: 769px) {
+    .nav-item::before {
+        content: attr(data-icon);
+        font-weight: bold;
+    }
+}
+
+/* Mobile: icons after text or hidden */
+@media (max-width: 768px) {
+    .nav-item::before {
+        content: '';
+        display: none;
+    }
+}
+
+/* Container and main content */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Tables responsive */
+@media (max-width: 768px) {
+    table {
+        font-size: 0.85rem;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Form responsive */
+.form-label {
+    font-weight: 500;
+}
+
+.form-control,
+.form-select {
+    border-radius: 0.375rem;
+    border: 1px solid #dee2e6;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Button styling */
+.btn {
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0b5ed7;
+}
+
+/* Alert styling */
+.alert {
+    border-radius: 0.375rem;
+    border: none;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #664d03;
+}
+
+.alert-info {
+    background-color: #cfe2ff;
+    color: #084298;
+}
+
+/* Modal styling */
+.modal-content {
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Footer */
+footer {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Hide on mobile */
+@media (max-width: 576px) {
+    .d-none-mobile {
+        display: none !important;
+    }
+}
+
+/* Show only on mobile */
+@media (min-width: 577px) {
+    .d-only-mobile {
+        display: none !important;
+    }
+}
+
+/* Utility classes */
+.text-center {
+    text-align: center;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.p-3 {
+    padding: 1rem;
+}

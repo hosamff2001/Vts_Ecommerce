@@ -65,5 +65,17 @@ namespace Vts_Ecommerce.Controllers
             SessionManager.ClearSession(HttpContext);
             return RedirectToAction("Login");
         }
+
+        [HttpPost]
+        public IActionResult Keepalive()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (!userId.HasValue)
+                return Unauthorized();
+
+            // Keepalive is handled by SessionManager.IsSessionValid() in the middleware
+            // which updates LastActivityTime
+            return Ok(new { success = true });
+        }
     }
 }
