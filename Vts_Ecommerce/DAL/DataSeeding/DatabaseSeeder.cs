@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Vts_Ecommerce.DAL.Repositories;
+using Vts_Ecommerce.Helpers;
 using Vts_Ecommerce.Models;
 
 namespace Vts_Ecommerce.DAL.DataSeeding
@@ -86,6 +87,11 @@ namespace Vts_Ecommerce.DAL.DataSeeding
 
             foreach (var user in users)
             {
+                // encrypt password before saving
+                if (!string.IsNullOrEmpty(user.Password))
+                {
+                    user.Password = EncryptionService.Encrypt(user.Password);
+                }
                 userRepo.Create(user);
             }
         }

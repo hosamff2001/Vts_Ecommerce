@@ -119,3 +119,5 @@ D:\tasks\Vts_Ecommerce\Vts_Ecommerce\obj\Debug\net9.0\Vts_Ecommerce.genruntimeco
 D:\tasks\Vts_Ecommerce\Vts_Ecommerce\obj\Debug\net9.0\ref\Vts_Ecommerce.dll
 D:\tasks\Vts_Ecommerce\Vts_Ecommerce\bin\Debug\net9.0\runtimes\unix\lib\net8.0\System.Data.SqlClient.dll
 D:\tasks\Vts_Ecommerce\Vts_Ecommerce\bin\Debug\net9.0\runtimes\win\lib\net8.0\System.Data.SqlClient.dll
+D:\tasks\Vts_Ecommerce\Vts_Ecommerce\obj\Debug\net9.0\Vts_Ecommerce.Migrations.initapp.resources
+D:\tasks\Vts_Ecommerce\Vts_Ecommerce\obj\Debug\net9.0\Vts_Ecommerce.csproj.GenerateResource.cache
