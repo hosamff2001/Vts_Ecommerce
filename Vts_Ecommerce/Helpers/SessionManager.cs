@@ -16,7 +16,7 @@ namespace Vts_Ecommerce.Helpers
         private const string SessionIdKey = "SessionId";
 
         // Create a session entry: writes to HttpContext.Session and persists UserSession record
-        public static void CreateSession(HttpContext httpContext, int userId, string username, string deviceInfo = null)
+        public static void CreateSession(HttpContext httpContext, int userId, string username, string? deviceInfo = null)
         {
             if (httpContext == null)
                 throw new ArgumentNullException(nameof(httpContext));
@@ -89,7 +89,7 @@ namespace Vts_Ecommerce.Helpers
             return httpContext?.Session.GetInt32(SessionUserIdKey);
         }
 
-        public static string GetCurrentUsername(HttpContext httpContext)
+        public static string? GetCurrentUsername(HttpContext httpContext)
         {
             return httpContext?.Session.GetString(SessionUsernameKey);
         }

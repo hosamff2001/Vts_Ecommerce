@@ -173,5 +173,36 @@ namespace Vts_Ecommerce.DAL.Repositories
                 LineTotal = reader.GetDecimal(6)
             };
         }
+
+        public dynamic GetByInvoiceId(int id)
+        {
+           var query = @"
+                SELECT sii.Id, sii.InvoiceId, sii.ProductId, p.Name AS ProductName, sii.Quantity, sii.UnitPrice, sii.ItemDiscount, sii.LineTotal
+                FROM SalesInvoiceItems sii
+                INNER JOIN Products p ON sii.ProductId = p.Id
+                WHERE sii.InvoiceId = @InvoiceId";
+
+            var parameters = new[] { AdoHelper.CreateParameter("@InvoiceId", id, SqlDbType.Int) };
+
+            var items = new List<dynamic>();
+            using (var reader = AdoHelper.ExecuteReader(query, CommandType.Text, parameters))
+            {
+                while (reader.Read())
+                {
+                    items.Add(new
+                    {
+                        Id = reader.GetInt32(0),
+                        InvoiceId = reader.GetInt32(1),
+                        ProductId = reader.GetInt32(2),
+                        ProductName = reader.GetString(3),
+                        Quantity = reader.GetInt32(4),
+                        UnitPrice = reader.GetDecimal(5),
+                        ItemDiscount = reader.GetDecimal(6),
+                        LineTotal = reader.GetDecimal(7)
+                    });
+                }
+            }
+            return items;
+        }
     }
 }

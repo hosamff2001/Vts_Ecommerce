@@ -4,7 +4,7 @@ using Vts_Ecommerce.Models;
 
 namespace Vts_Ecommerce.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AuthorizedController
     {
         private readonly ILogger<HomeController> _logger;
 

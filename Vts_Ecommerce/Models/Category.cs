@@ -27,7 +27,7 @@ namespace Vts_Ecommerce.Models
         public bool IsActive { get; set; } = true;
 
         // Navigation property
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product>? Products { get; set; }
     }
 }
 

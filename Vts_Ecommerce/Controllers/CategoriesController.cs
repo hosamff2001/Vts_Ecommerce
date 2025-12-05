@@ -5,7 +5,7 @@ using Vts_Ecommerce.Models;
 
 namespace Vts_Ecommerce.Controllers
 {
-    public class CategoriesController : Controller
+    public class CategoriesController : AuthorizedController
     {
         private readonly CategoryRepository _repo = new CategoryRepository();
 
@@ -24,24 +24,36 @@ namespace Vts_Ecommerce.Controllers
 
         public IActionResult Create()
         {
-            return View(new Category());
+            return View(new Category { IsActive = true });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Category model)
         {
+            // Trim whitespace
+            if (!string.IsNullOrWhiteSpace(model.Name))
+                model.Name = model.Name.Trim();
+            if (!string.IsNullOrWhiteSpace(model.Description))
+                model.Description = model.Description.Trim();
+
             if (!ModelState.IsValid)
+            {
                 return View(model);
+            }
 
             try
             {
-                _repo.Create(model);
-                return RedirectToAction(nameof(Index));
+                int newId = _repo.Create(model);
+                if (newId > 0)
+                    return RedirectToAction(nameof(Index));
+                
+                ModelState.AddModelError(string.Empty, "Failed to create category. Please try again.");
+                return View(model);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "Error creating category: " + ex.Message);
+                ModelState.AddModelError(string.Empty, $"Error creating category: {ex.Message}");
                 return View(model);
             }
         }
@@ -55,19 +67,32 @@ namespace Vts_Ecommerce.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Category model)
+        public IActionResult Edit(int id, Category model)
         {
+            if (id != model.Id)
+                return BadRequest("ID mismatch");
+
+            // Trim whitespace
+            if (!string.IsNullOrWhiteSpace(model.Name))
+                model.Name = model.Name.Trim();
+            if (!string.IsNullOrWhiteSpace(model.Description))
+                model.Description = model.Description.Trim();
+
             if (!ModelState.IsValid)
                 return View(model);
 
             try
             {
-                _repo.Update(model);
-                return RedirectToAction(nameof(Index));
+                bool success = _repo.Update(model);
+                if (success)
+                    return RedirectToAction(nameof(Index));
+                
+                ModelState.AddModelError(string.Empty, "Failed to update category. Please try again.");
+                return View(model);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "Error updating category: " + ex.Message);
+                ModelState.AddModelError(string.Empty, $"Error updating category: {ex.Message}");
                 return View(model);
             }
         }
@@ -85,12 +110,18 @@ namespace Vts_Ecommerce.Controllers
         {
             try
             {
-                _repo.Delete(id);
-                return RedirectToAction(nameof(Index));
+                bool success = _repo.Delete(id);
+                if (success)
+                    return RedirectToAction(nameof(Index));
+                
+                // If delete failed, show the delete view with error
+                var model = _repo.GetById(id);
+                ModelState.AddModelError(string.Empty, "Failed to delete category. Please try again.");
+                return View("Delete", model);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "Error deleting category: " + ex.Message);
+                ModelState.AddModelError(string.Empty, $"Error deleting category: {ex.Message}");
                 var model = _repo.GetById(id);
                 return View("Delete", model);
             }

@@ -24,7 +24,7 @@ namespace Vts_Ecommerce.Models
         public string SessionId { get; set; }
 
         [StringLength(500)]
-        public string DeviceInfo { get; set; }
+        public string? DeviceInfo { get; set; }
 
         [Required]
         public DateTime LoginTime { get; set; } = DateTime.Now;

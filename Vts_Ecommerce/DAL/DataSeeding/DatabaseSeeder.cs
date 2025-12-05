@@ -42,10 +42,16 @@ namespace Vts_Ecommerce.DAL.DataSeeding
 
                 Console.WriteLine("Database seeding completed successfully!");
             }
+            catch (ArgumentException ex) when (ex.Message.Contains("Keyword not supported") || ex.Message.Contains("Connection"))
+            {
+                // Database connection issue - likely schema doesn't exist yet
+                Console.WriteLine($"⚠ Database seeding skipped: {ex.Message}");
+                Console.WriteLine("⚠ Run Entity Framework migrations first: dotnet ef database update");
+            }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error during database seeding: {ex.Message}");
-                throw;
+                Console.WriteLine($"⚠ Error during database seeding: {ex.Message}");
+                // Don't throw - allow app to start even if seeding fails
             }
         }
 
@@ -164,7 +170,7 @@ namespace Vts_Ecommerce.DAL.DataSeeding
                 {
                     Name = "Laptop Pro 15",
                     Description = "High-performance laptop with 16GB RAM and 512GB SSD",
-                    Price = 1299.99m,
+                    CostPrice = 1299.99m,
                     StockQuantity = 25,
                     CategoryId = categories[0].Id,
                     IsActive = true
@@ -173,7 +179,7 @@ namespace Vts_Ecommerce.DAL.DataSeeding
                 {
                     Name = "Wireless Mouse",
                     Description = "Ergonomic wireless mouse with long battery life",
-                    Price = 29.99m,
+                    CostPrice = 29.99m,
                     StockQuantity = 150,
                     CategoryId = categories[0].Id,
                     IsActive = true
@@ -182,7 +188,7 @@ namespace Vts_Ecommerce.DAL.DataSeeding
                 {
                     Name = "USB-C Hub",
                     Description = "7-in-1 USB-C hub with HDMI and card reader",
-                    Price = 49.99m,
+                    CostPrice = 49.99m,
                     StockQuantity = 80,
                     CategoryId = categories[0].Id,
                     IsActive = true
@@ -192,7 +198,7 @@ namespace Vts_Ecommerce.DAL.DataSeeding
                 {
                     Name = "Cotton T-Shirt",
                     Description = "100% cotton comfortable t-shirt",
-                    Price = 19.99m,
+                    CostPrice = 19.99m,
                     StockQuantity = 200,
                     CategoryId = categories[1].Id,
                     IsActive = true
@@ -201,7 +207,7 @@ namespace Vts_Ecommerce.DAL.DataSeeding
                 {
                     Name = "Jeans",
                     Description = "Classic blue denim jeans",
-                    Price = 59.99m,
+                    CostPrice = 59.99m,
                     StockQuantity = 120,
                     CategoryId = categories[1].Id,
                     IsActive = true
@@ -211,7 +217,7 @@ namespace Vts_Ecommerce.DAL.DataSeeding
                 {
                     Name = "C# Programming Guide",
                     Description = "Comprehensive guide to C# programming",
-                    Price = 39.99m,
+                    CostPrice = 39.99m,
                     StockQuantity = 50,
                     CategoryId = categories[2].Id,
                     IsActive = true
@@ -220,7 +226,7 @@ namespace Vts_Ecommerce.DAL.DataSeeding
                 {
                     Name = "Clean Code",
                     Description = "A Handbook of Agile Software Craftsmanship",
-                    Price = 45.99m,
+                    CostPrice = 45.99m,
                     StockQuantity = 45,
                     CategoryId = categories[2].Id,
                     IsActive = true
@@ -230,7 +236,7 @@ namespace Vts_Ecommerce.DAL.DataSeeding
                 {
                     Name = "LED Desk Lamp",
                     Description = "Adjustable LED desk lamp with USB charging",
-                    Price = 34.99m,
+                    CostPrice = 34.99m,
                     StockQuantity = 75,
                     CategoryId = categories[3].Id,
                     IsActive = true
@@ -239,7 +245,7 @@ namespace Vts_Ecommerce.DAL.DataSeeding
                 {
                     Name = "Plant Pot",
                     Description = "Ceramic plant pot with drainage",
-                    Price = 12.99m,
+                    CostPrice = 12.99m,
                     StockQuantity = 200,
                     CategoryId = categories[3].Id,
                     IsActive = true
@@ -249,7 +255,7 @@ namespace Vts_Ecommerce.DAL.DataSeeding
                 {
                     Name = "Running Shoes",
                     Description = "Professional running shoes with cushioning",
-                    Price = 89.99m,
+                    CostPrice = 89.99m,
                     StockQuantity = 60,
                     CategoryId = categories[4].Id,
                     IsActive = true
@@ -258,7 +264,7 @@ namespace Vts_Ecommerce.DAL.DataSeeding
                 {
                     Name = "Yoga Mat",
                     Description = "Non-slip yoga mat with carrying strap",
-                    Price = 24.99m,
+                    CostPrice = 24.99m,
                     StockQuantity = 100,
                     CategoryId = categories[4].Id,
                     IsActive = true

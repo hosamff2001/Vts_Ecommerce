@@ -14,7 +14,7 @@ public class ProductConfiguration : EntityTypeConfiguration<Product>
         Property(p => p.Description)
             .HasMaxLength(1000);
 
-        Property(p => p.Price)
+        Property(p => p.CostPrice)
             .HasPrecision(18, 2)
             .IsRequired();
 

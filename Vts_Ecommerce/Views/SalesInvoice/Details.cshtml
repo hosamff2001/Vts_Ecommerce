@@ -1,0 +1,126 @@
+@model SalesInvoice
+
+@{
+    ViewData["Title"] = "Invoice Details";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Invoice Details</h2>
+            
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>Invoice Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Invoice Number:</label>
+                            <p>@Model.InvoiceNumber</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Invoice Date:</label>
+                            <p>@Model.InvoiceDate.ToString("yyyy-MM-dd")</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Customer ID:</label>
+                            <p>@Model.CustomerId</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Status:</label>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (ViewBag.LineItems != null && ViewBag.LineItems.Count > 0)
+            {
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5>Line Items</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Qty</th>
+                                        <th>Unit Price</th>
+                                        <th>Discount</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.LineItems)
+                                    {
+                                        <tr>
+                                            <td>@item.ProductId</td>
+                                            <td>@item.Quantity</td>
+                                            <td>@item.UnitPrice.ToString("C")</td>
+                                            <td>@(item.DiscountAmount ?? 0).ToString("C")</td>
+                                            <td>@((item.Quantity * item.UnitPrice) - (item.DiscountAmount ?? 0)).ToString("C")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5>Totals</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <div class="row mb-2">
+                                <div class="col-md-8">Subtotal:</div>
+                                <div class="col-md-4 text-end">
+                                    @{
+                                        var lineItems = ViewBag.LineItems as IEnumerable<dynamic>;
+                                        decimal subtotal = 0;
+                                        if (lineItems != null)
+                                        {
+                                            foreach (var item in lineItems)
+                                            {
+                                                subtotal += ((decimal)item.Quantity * (decimal)item.UnitPrice) - ((decimal?)(item.DiscountAmount) ?? 0);
+                                            }
+                                        }
+                                    }
+                                    @subtotal.ToString("C")
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-8">Invoice Discount:</div>
+                                <div class="col-md-4 text-end">-@(Model.DiscountAmount ).ToString("C")</div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-8">Tax:</div>
+                                <div class="col-md-4 text-end">+@(Model.TaxAmount ).ToString("C")</div>
+                            </div>
+                            <div class="row border-top pt-2" style="font-weight: bold; font-size: 1.1em;">
+                                <div class="col-md-8">Grand Total:</div>
+                                <div class="col-md-4 text-end">@Model.TotalAmount.ToString("C")</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

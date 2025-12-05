@@ -1,0 +1,87 @@
+@model SalesInvoice
+
+@{
+    ViewData["Title"] = "Delete Invoice";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>Delete Sales Invoice</h2>
+
+            <div class="alert alert-warning mt-3">
+                <strong>Are you sure?</strong> This action cannot be undone. All associated line items will also be
+                deleted.
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5>Invoice Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Invoice Number:</label>
+                            <p>@Model.InvoiceNumber</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Invoice Date:</label>
+                            <p>@Model.InvoiceDate.ToString("yyyy-MM-dd")</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Customer ID:</label>
+                            <p>@Model.CustomerId</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Total Amount:</label>
+                            <p>@Model.TotalAmount.ToString("C")</p>
+                        </div>
+                    </div>
+
+                    @if (ViewBag.LineItems != null && ViewBag.LineItems.Count > 0)
+                    {
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Line Items:</label>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Qty</th>
+                                            <th>Unit Price</th>
+                                            <th>Discount</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in ViewBag.LineItems)
+                                        {
+                                            <tr>
+                                                <td>@item.ProductId</td>
+                                                <td>@item.Quantity</td>
+                                                <td>@item.UnitPrice.ToString("C")</td>
+                                                <td>@(item.DiscountAmount ?? 0).ToString("C")</td>
+                                                <td>@((item.Quantity * item.UnitPrice) - (item.DiscountAmount ??
+                                                                                                0)).ToString("C")</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
+
+                    <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-inline mt-3">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <button type="submit" class="btn btn-danger">Delete Invoice</button>
+                        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

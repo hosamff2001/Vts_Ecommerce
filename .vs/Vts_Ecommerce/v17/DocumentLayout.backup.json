@@ -1,7 +1,38 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\tasks\\Vts_Ecommerce\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|d:\\tasks\\vts_ecommerce\\vts_ecommerce\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|solutionrelative:vts_ecommerce\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|d:\\tasks\\vts_ecommerce\\vts_ecommerce\\dal\\configurations\\usersessionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|solutionrelative:vts_ecommerce\\dal\\configurations\\usersessionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|d:\\tasks\\vts_ecommerce\\vts_ecommerce\\dal\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|solutionrelative:vts_ecommerce\\dal\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|d:\\tasks\\vts_ecommerce\\vts_ecommerce\\migrations\\202512041541126_secondmigrat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|solutionrelative:vts_ecommerce\\migrations\\202512041541126_secondmigrat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|d:\\tasks\\vts_ecommerce\\vts_ecommerce\\dal\\adohelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|solutionrelative:vts_ecommerce\\dal\\adohelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|d:\\tasks\\vts_ecommerce\\vts_ecommerce\\dal\\dataseeding\\databaseseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|solutionrelative:vts_ecommerce\\dal\\dataseeding\\databaseseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/DefaultConnection/True/SqlTable/dbo.Categories.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/DefaultConnection/True/SqlTable/dbo.Users.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +40,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +49,97 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\appsettings.json",
+              "RelativeDocumentMoniker": "Vts_Ecommerce\\appsettings.json",
+              "ToolTip": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\appsettings.json",
+              "RelativeToolTip": "Vts_Ecommerce\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-04T15:42:26.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "202512041541126_secondmigrat.cs",
+              "DocumentMoniker": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\Migrations\\202512041541126_secondmigrat.cs",
+              "RelativeDocumentMoniker": "Vts_Ecommerce\\Migrations\\202512041541126_secondmigrat.cs",
+              "ToolTip": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\Migrations\\202512041541126_secondmigrat.cs",
+              "RelativeToolTip": "Vts_Ecommerce\\Migrations\\202512041541126_secondmigrat.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T15:41:14.608Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\DAL\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "Vts_Ecommerce\\DAL\\Repositories\\UserRepository.cs",
+              "ToolTip": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\DAL\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "Vts_Ecommerce\\DAL\\Repositories\\UserRepository.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAApwB8AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T15:38:14.651Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DatabaseSeeder.cs",
+              "DocumentMoniker": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\DAL\\DataSeeding\\DatabaseSeeder.cs",
+              "RelativeDocumentMoniker": "Vts_Ecommerce\\DAL\\DataSeeding\\DatabaseSeeder.cs",
+              "ToolTip": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\DAL\\DataSeeding\\DatabaseSeeder.cs",
+              "RelativeToolTip": "Vts_Ecommerce\\DAL\\DataSeeding\\DatabaseSeeder.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAiwGQAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T15:37:23.686Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "dbo.Categories.sql",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/DefaultConnection/True/SqlTable/dbo.Categories.sql",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/DefaultConnection/True/SqlTable/dbo.Categories.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-12-04T14:54:40.187Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "dbo.Users.sql",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/DefaultConnection/True/SqlTable/dbo.Users.sql",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/DefaultConnection/True/SqlTable/dbo.Users.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-12-04T14:53:58.912Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AdoHelper.cs",
+              "DocumentMoniker": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\DAL\\AdoHelper.cs",
+              "RelativeDocumentMoniker": "Vts_Ecommerce\\DAL\\AdoHelper.cs",
+              "ToolTip": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\DAL\\AdoHelper.cs",
+              "RelativeToolTip": "Vts_Ecommerce\\DAL\\AdoHelper.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAMwFwAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T14:39:04.17Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserSessionConfiguration.cs",
+              "DocumentMoniker": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\DAL\\Configurations\\UserSessionConfiguration.cs",
+              "RelativeDocumentMoniker": "Vts_Ecommerce\\DAL\\Configurations\\UserSessionConfiguration.cs",
+              "ToolTip": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\DAL\\Configurations\\UserSessionConfiguration.cs",
+              "RelativeToolTip": "Vts_Ecommerce\\DAL\\Configurations\\UserSessionConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T14:37:06.169Z"
             }
           ]
         }

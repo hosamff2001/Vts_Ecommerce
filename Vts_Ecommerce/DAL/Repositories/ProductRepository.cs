@@ -23,15 +23,16 @@ namespace Vts_Ecommerce.DAL.Repositories
                 throw new ArgumentNullException(nameof(product));
 
             string query = @"
-                INSERT INTO Products (Name, Description, Price, StockQuantity, CategoryId, IsActive)
-                VALUES (@Name, @Description, @Price, @StockQuantity, @CategoryId, @IsActive);
+                INSERT INTO Products (Name, Description, CostPrice, SellingPrice, StockQuantity, CategoryId, IsActive)
+                VALUES (@Name, @Description, @CostPrice, @SellingPrice, @StockQuantity, @CategoryId, @IsActive);
                 SELECT SCOPE_IDENTITY();";
 
             var parameters = new[]
             {
                 AdoHelper.CreateParameter("@Name", product.Name, SqlDbType.NVarChar, 100),
                 AdoHelper.CreateParameter("@Description", product.Description, SqlDbType.NVarChar, 1000),
-                AdoHelper.CreateParameter("@Price", product.Price, SqlDbType.Decimal),
+                AdoHelper.CreateParameter("@CostPrice", product.CostPrice, SqlDbType.Decimal),
+                AdoHelper.CreateParameter("@SellingPrice", product.SellingPrice, SqlDbType.Decimal),
                 AdoHelper.CreateParameter("@StockQuantity", product.StockQuantity, SqlDbType.Int),
                 AdoHelper.CreateParameter("@CategoryId", product.CategoryId, SqlDbType.Int),
                 AdoHelper.CreateParameter("@IsActive", product.IsActive, SqlDbType.Bit)
@@ -47,7 +48,7 @@ namespace Vts_Ecommerce.DAL.Repositories
         public Product GetById(int id)
         {
             string query = @"
-                SELECT Id, Name, Description, Price, StockQuantity, CategoryId, IsActive
+                SELECT Id, Name, Description, CostPrice, SellingPrice, StockQuantity, CategoryId, IsActive
                 FROM Products
                 WHERE Id = @Id";
 
@@ -69,7 +70,7 @@ namespace Vts_Ecommerce.DAL.Repositories
         public List<Product> GetAll(bool activeOnly = true)
         {
             string query = @"
-                SELECT Id, Name, Description, Price, StockQuantity, CategoryId, IsActive
+                SELECT Id, Name, Description, CostPrice, SellingPrice, StockQuantity, CategoryId, IsActive
                 FROM Products";
 
             if (activeOnly)
@@ -96,7 +97,7 @@ namespace Vts_Ecommerce.DAL.Repositories
         public List<Product> GetByCategory(int categoryId, bool activeOnly = true)
         {
             string query = @"
-                SELECT Id, Name, Description, Price, StockQuantity, CategoryId, IsActive
+                SELECT Id, Name, Description, CostPrice, SellingPrice, StockQuantity, CategoryId, IsActive
                 FROM Products
                 WHERE CategoryId = @CategoryId";
 
@@ -129,7 +130,7 @@ namespace Vts_Ecommerce.DAL.Repositories
                 throw new ArgumentException("Search term cannot be null or empty", nameof(searchTerm));
 
             string query = @"
-                SELECT Id, Name, Description, Price, StockQuantity, CategoryId, IsActive
+                SELECT Id, Name, Description, CostPrice, SellingPrice, StockQuantity, CategoryId, IsActive
                 FROM Products
                 WHERE Name LIKE @SearchTerm";
 
@@ -168,7 +169,8 @@ namespace Vts_Ecommerce.DAL.Repositories
                 UPDATE Products
                 SET Name = @Name,
                     Description = @Description,
-                    Price = @Price,
+                    CostPrice = @CostPrice,
+                    SellingPrice = @SellingPrice,
                     StockQuantity = @StockQuantity,
                     CategoryId = @CategoryId,
                     IsActive = @IsActive
@@ -179,7 +181,8 @@ namespace Vts_Ecommerce.DAL.Repositories
                 AdoHelper.CreateParameter("@Id", product.Id, SqlDbType.Int),
                 AdoHelper.CreateParameter("@Name", product.Name, SqlDbType.NVarChar, 100),
                 AdoHelper.CreateParameter("@Description", product.Description, SqlDbType.NVarChar, 1000),
-                AdoHelper.CreateParameter("@Price", product.Price, SqlDbType.Decimal),
+                AdoHelper.CreateParameter("@CostPrice", product.CostPrice, SqlDbType.Decimal),
+                AdoHelper.CreateParameter("@SellingPrice", product.SellingPrice, SqlDbType.Decimal),
                 AdoHelper.CreateParameter("@StockQuantity", product.StockQuantity, SqlDbType.Int),
                 AdoHelper.CreateParameter("@CategoryId", product.CategoryId, SqlDbType.Int),
                 AdoHelper.CreateParameter("@IsActive", product.IsActive, SqlDbType.Bit)
@@ -246,7 +249,8 @@ namespace Vts_Ecommerce.DAL.Repositories
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                 Name = reader.GetString(reader.GetOrdinal("Name")),
                 Description = reader.IsDBNull(reader.GetOrdinal("Description")) ? null : reader.GetString(reader.GetOrdinal("Description")),
-                Price = reader.GetDecimal(reader.GetOrdinal("Price")),
+                CostPrice = reader.GetDecimal(reader.GetOrdinal("CostPrice")),
+                SellingPrice = reader.GetDecimal(reader.GetOrdinal("SellingPrice")),
                 StockQuantity = reader.GetInt32(reader.GetOrdinal("StockQuantity")),
                 CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
                 IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive"))

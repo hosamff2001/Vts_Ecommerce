@@ -1,0 +1,73 @@
+@model Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>Product Details</h2>
+            
+            <div class="card mt-4">
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Product Name:</label>
+                            <p>@Model.Name</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Status:</label>
+                            <p>
+                                @if (Model.IsActive)
+                                {
+                                    <span class="badge bg-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Inactive</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Category ID:</label>
+                            <p>@Model.CategoryId</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Stock Quantity:</label>
+                            <p>@Model.StockQuantity</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Cost Price:</label>
+                            <p>@Model.CostPrice.ToString("C")</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Selling Price:</label>
+                            <p>@Model.SellingPrice.ToString("C")</p>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.Description))
+                    {
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description:</label>
+                            <p>@Model.Description</p>
+                        </div>
+                    }
+
+                    <div class="d-flex gap-2 mt-4">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+                        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

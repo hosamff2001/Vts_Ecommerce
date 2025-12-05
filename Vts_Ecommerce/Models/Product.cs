@@ -24,7 +24,10 @@ namespace Vts_Ecommerce.Models
         public string Description { get; set; }
 
         [Required]
-        public decimal Price { get; set; }
+        public decimal CostPrice { get; set; } = 0;
+
+        [Required]
+        public decimal SellingPrice { get; set; } = 0;
 
         [Required]
         public int StockQuantity { get; set; } = 0;
@@ -37,9 +40,10 @@ namespace Vts_Ecommerce.Models
 
         // Navigation properties
         [ForeignKey("CategoryId")]
-        public virtual Category Category { get; set; }
+        public virtual Category? Category { get; set; }
 
-        public virtual ICollection<SalesInvoiceItem> InvoiceItems { get; set; }
+        public virtual ICollection<SalesInvoiceItem>? InvoiceItems { get; set; }
+        public decimal Price { get; internal set; }
     }
 }
 

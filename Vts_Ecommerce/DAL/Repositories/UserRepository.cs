@@ -27,8 +27,7 @@ namespace Vts_Ecommerce.DAL.Repositories
 
             string query = @"
                 INSERT INTO Users (Username, Password, Email, IsActive, CreatedDate)
-                VALUES (@Username, @Password, @Email, @IsActive, @CreatedDate);
-                SELECT SCOPE_IDENTITY();";
+                VALUES (@Username, @Password, @Email, @IsActive, @CreatedDate);";
 
             var parameters = new[]
             {

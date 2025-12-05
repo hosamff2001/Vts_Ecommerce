@@ -1,0 +1,55 @@
+@model Product
+
+@{
+    ViewData["Title"] = "Delete Product";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>Delete Product</h2>
+            
+            <div class="alert alert-warning mt-3">
+                <strong>Are you sure?</strong> This action cannot be undone.
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Product Name:</label>
+                            <p>@Model.Name</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Category ID:</label>
+                            <p>@Model.CategoryId</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Cost Price:</label>
+                            <p>@Model.CostPrice.ToString("C")</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Selling Price:</label>
+                            <p>@Model.SellingPrice.ToString("C")</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Stock:</label>
+                        <p>@Model.StockQuantity units</p>
+                    </div>
+
+                    <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <button type="submit" class="btn btn-danger">Delete Product</button>
+                        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

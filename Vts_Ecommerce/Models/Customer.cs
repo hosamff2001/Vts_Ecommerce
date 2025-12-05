@@ -29,11 +29,14 @@ namespace Vts_Ecommerce.Models
         [StringLength(500)]
         public string Address { get; set; }
 
+        [StringLength(500)]
+        public string Notes { get; set; }
+
         [Required]
         public bool IsActive { get; set; } = true;
 
         // Navigation property
-        public virtual ICollection<SalesInvoice> Invoices { get; set; }
+        public virtual ICollection<SalesInvoice>? Invoices { get; set; }
     }
 }
 

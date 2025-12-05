@@ -44,14 +44,32 @@ namespace Vts_Ecommerce.Models
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
+        // Convenience properties for controller
+        [NotMapped]
+        public decimal TotalAmount
+        {
+            get { return Total; }
+            set { Total = value; }
+        }
+
+        [NotMapped]
+        public decimal DiscountAmount
+        {
+            get { return InvoiceDiscount; }
+            set { InvoiceDiscount = value; }
+        }
+
+        [NotMapped]
+        public decimal TaxAmount { get; set; } = 0;
+
         // Navigation properties
         [ForeignKey("CustomerId")]
-        public virtual Customer Customer { get; set; }
+        public virtual Customer? Customer { get; set; }
 
         [ForeignKey("CreatedBy")]
-        public virtual User CreatedByUser { get; set; }
+        public virtual User? CreatedByUser { get; set; }
 
-        public virtual ICollection<SalesInvoiceItem> InvoiceItems { get; set; }
+        public virtual ICollection<SalesInvoiceItem>? InvoiceItems { get; set; }
     }
 }
 
