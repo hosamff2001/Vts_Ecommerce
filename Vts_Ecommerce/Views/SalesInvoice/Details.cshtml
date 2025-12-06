@@ -38,7 +38,10 @@
                 </div>
             </div>
 
-            @if (ViewBag.LineItems != null && ViewBag.LineItems.Count > 0)
+            @{
+                var lineItems = ViewBag.LineItems as IEnumerable<SalesInvoiceItem>;
+            }
+            @if (lineItems != null && lineItems.Any())
             {
                 <div class="card mt-3">
                     <div class="card-header">
@@ -57,14 +60,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in ViewBag.LineItems)
+                                    @foreach (var item in lineItems)
                                     {
                                         <tr>
                                             <td>@item.ProductId</td>
                                             <td>@item.Quantity</td>
                                             <td>@item.UnitPrice.ToString("C")</td>
-                                            <td>@(item.DiscountAmount ?? 0).ToString("C")</td>
-                                            <td>@((item.Quantity * item.UnitPrice) - (item.DiscountAmount ?? 0)).ToString("C")</td>
+                                            <td>@item.ItemDiscount.ToString("C")</td>
+                                            <td>@((item.Quantity * item.UnitPrice - item.ItemDiscount).ToString("C"))</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -85,31 +88,20 @@
                             <div class="row mb-2">
                                 <div class="col-md-8">Subtotal:</div>
                                 <div class="col-md-4 text-end">
-                                    @{
-                                        var lineItems = ViewBag.LineItems as IEnumerable<dynamic>;
-                                        decimal subtotal = 0;
-                                        if (lineItems != null)
-                                        {
-                                            foreach (var item in lineItems)
-                                            {
-                                                subtotal += ((decimal)item.Quantity * (decimal)item.UnitPrice) - ((decimal?)(item.DiscountAmount) ?? 0);
-                                            }
-                                        }
-                                    }
-                                    @subtotal.ToString("C")
+                                    @Model.SubTotal.ToString("C")
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col-md-8">Invoice Discount:</div>
-                                <div class="col-md-4 text-end">-@(Model.DiscountAmount ).ToString("C")</div>
+                                <div class="col-md-4 text-end">-@Model.InvoiceDiscount.ToString("C")</div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col-md-8">Tax:</div>
-                                <div class="col-md-4 text-end">+@(Model.TaxAmount ).ToString("C")</div>
+                                <div class="col-md-4 text-end">+@Model.TaxAmount.ToString("C")</div>
                             </div>
                             <div class="row border-top pt-2" style="font-weight: bold; font-size: 1.1em;">
                                 <div class="col-md-8">Grand Total:</div>
-                                <div class="col-md-4 text-end">@Model.TotalAmount.ToString("C")</div>
+                                <div class="col-md-4 text-end">@Model.Total.ToString("C")</div>
                             </div>
                         </div>
                     </div>
@@ -117,8 +109,7 @@
             </div>
 
             <div class="d-flex gap-2 mt-4">
-                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
-                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+
                 <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </div>

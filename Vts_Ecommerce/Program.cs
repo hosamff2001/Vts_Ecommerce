@@ -58,6 +58,8 @@ try
         {
             // migrate existing Price data into SellingPrice
             AdoHelper.ExecuteNonQuery("UPDATE Products SET SellingPrice = Price WHERE SellingPrice = 0");
+            // Allow NULLs in legacy Price column to prevent INSERT errors when creating new products
+            AdoHelper.ExecuteNonQuery("ALTER TABLE Products ALTER COLUMN Price DECIMAL(18,2) NULL");
         }
     }
 

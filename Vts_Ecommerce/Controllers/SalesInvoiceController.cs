@@ -18,7 +18,7 @@ namespace Vts_Ecommerce.Controllers
 
         public IActionResult Index()
         {
-            var invoices = _invoiceRepo.GetAll();
+            var invoices = _invoiceRepo.GetAll().OrderByDescending(i => i.InvoiceDate).ToList();
             return View(invoices);
         }
 
@@ -26,10 +26,10 @@ namespace Vts_Ecommerce.Controllers
         {
             var invoice = _invoiceRepo.GetById(id);
             if (invoice == null) return NotFound();
-            
+
             var lineItems = _invoiceLineRepo.GetByInvoiceId(id);
             ViewBag.LineItems = lineItems;
-            
+
             return View(invoice);
         }
 
@@ -37,14 +37,14 @@ namespace Vts_Ecommerce.Controllers
         {
             ViewBag.Customers = _customerRepo.GetAll().Where(c => c.IsActive).ToList();
             ViewBag.Products = _productRepo.GetAll().Where(p => p.IsActive).ToList();
-            
+
             var model = new SalesInvoice
             {
                 InvoiceDate = DateTime.Now,
                 DiscountAmount = 0,
                 TaxAmount = 0
             };
-            
+
             return View(model);
         }
 
@@ -63,7 +63,7 @@ namespace Vts_Ecommerce.Controllers
             {
                 // Parse line items from JSON (sent from frontend)
                 var lineItems = ParseLineItems(lineItemsJson);
-                
+
                 if (!lineItems.Any())
                 {
                     ViewBag.Customers = _customerRepo.GetAll().Where(c => c.IsActive).ToList();
@@ -75,9 +75,9 @@ namespace Vts_Ecommerce.Controllers
                 // Calculate totals
                 decimal itemDiscountTotal = lineItems.Sum(li => li.ItemDiscount);
                 decimal subtotal = lineItems.Sum(li => li.Quantity * li.UnitPrice);
-                decimal invoiceDiscount = model.DiscountAmount ;
+                decimal invoiceDiscount = model.DiscountAmount;
                 decimal tax = model.TaxAmount;
-                
+
                 // Set model properties to match database schema
                 model.InvoiceNumber = "INV-" + DateTime.Now.ToString("yyyyMMddHHmmss");
                 model.SubTotal = subtotal;
@@ -89,7 +89,7 @@ namespace Vts_Ecommerce.Controllers
 
                 // Create invoice with line items
                 _invoiceRepo.CreateInvoiceWithItems(model, lineItems);
-                
+
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -101,110 +101,7 @@ namespace Vts_Ecommerce.Controllers
             }
         }
 
-        public IActionResult Edit(int id)
-        {
-            var invoice = _invoiceRepo.GetById(id);
-            if (invoice == null) return NotFound();
 
-            var lineItems = _invoiceLineRepo.GetByInvoiceId(id);
-            
-            ViewBag.Customers = _customerRepo.GetAll().Where(c => c.IsActive).ToList();
-            ViewBag.Products = _productRepo.GetAll().Where(p => p.IsActive).ToList();
-            ViewBag.LineItems = lineItems;
-            
-            return View(invoice);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, SalesInvoice model, string lineItemsJson)
-        {
-            if (id != model.Id)
-                return BadRequest();
-
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Customers = _customerRepo.GetAll().Where(c => c.IsActive).ToList();
-                ViewBag.Products = _productRepo.GetAll().Where(p => p.IsActive).ToList();
-                return View(model);
-            }
-
-            try
-            {
-                var lineItems = ParseLineItems(lineItemsJson);
-                
-                if (!lineItems.Any())
-                {
-                    ViewBag.Customers = _customerRepo.GetAll().Where(c => c.IsActive).ToList();
-                    ViewBag.Products = _productRepo.GetAll().Where(p => p.IsActive).ToList();
-                    ModelState.AddModelError(string.Empty, "Invoice must have at least one line item.");
-                    return View(model);
-                }
-
-                decimal itemDiscountTotal = lineItems.Sum(li => li.ItemDiscount);
-                decimal subtotal = lineItems.Sum(li => li.Quantity * li.UnitPrice);
-                decimal invoiceDiscount = model.DiscountAmount ;
-                decimal tax = model.TaxAmount ;
-                
-                model.SubTotal = subtotal;
-                model.ItemDiscount = itemDiscountTotal;
-                model.InvoiceDiscount = invoiceDiscount;
-                model.Total = subtotal + tax - invoiceDiscount;
-
-                // Delete existing line items and create new ones
-                var existingLines = _invoiceLineRepo.GetByInvoiceId(id);
-                foreach (var line in existingLines)
-                {
-                    _invoiceLineRepo.Delete(line.Id);
-                }
-
-                _invoiceRepo.Update(model);
-                foreach (var lineItem in lineItems)
-                {
-                    lineItem.InvoiceId = id;
-                    _invoiceLineRepo.Create(lineItem);
-                }
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Customers = _customerRepo.GetAll().Where(c => c.IsActive).ToList();
-                ViewBag.Products = _productRepo.GetAll().Where(p => p.IsActive).ToList();
-                ModelState.AddModelError(string.Empty, "Error updating invoice: " + ex.Message);
-                return View(model);
-            }
-        }
-
-        public IActionResult Delete(int id)
-        {
-            var invoice = _invoiceRepo.GetById(id);
-            if (invoice == null) return NotFound();
-            
-            var lineItems = _invoiceLineRepo.GetByInvoiceId(id);
-            ViewBag.LineItems = lineItems;
-            
-            return View(invoice);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            try
-            {
-                _invoiceRepo.Delete(id); // Cascade delete handled by SQL
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, "Error deleting invoice: " + ex.Message);
-                var invoice = _invoiceRepo.GetById(id);
-                var lineItems = _invoiceLineRepo.GetByInvoiceId(id);
-                ViewBag.LineItems = lineItems;
-                return View("Delete", invoice);
-            }
-        }
 
         private List<SalesInvoiceItem> ParseLineItems(string json)
         {
@@ -253,7 +150,7 @@ namespace Vts_Ecommerce.Controllers
             var product = _productRepo.GetById(productId);
             if (product == null)
                 return Json(new { price = 0 });
-            
+
             return Json(new { price = product.SellingPrice });
         }
     }

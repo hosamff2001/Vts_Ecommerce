@@ -216,5 +216,4 @@ D:\tasks\Vts_Ecommerce\Vts_Ecommerce\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.
 D:\tasks\Vts_Ecommerce\Vts_Ecommerce\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 D:\tasks\Vts_Ecommerce\Vts_Ecommerce\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 D:\tasks\Vts_Ecommerce\Vts_Ecommerce\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
-D:\tasks\Vts_Ecommerce\Vts_Ecommerce\obj\Debug\net9.0\ar\Vts_Ecommerce.resources.cs
-D:\tasks\Vts_Ecommerce\Vts_Ecommerce\obj\Debug\net9.0\en\Vts_Ecommerce.resources.cs
+D:\tasks\Vts_Ecommerce\Vts_Ecommerce\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

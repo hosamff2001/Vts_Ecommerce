@@ -16,9 +16,8 @@ namespace Vts_Ecommerce.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
         [StringLength(50)]
-        public string InvoiceNumber { get; set; }
+        public string? InvoiceNumber { get; set; }
 
         [Required]
         public int CustomerId { get; set; }
