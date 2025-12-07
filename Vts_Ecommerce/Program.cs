@@ -1,6 +1,9 @@
 using Vts_Ecommerce.DAL;
 using Vts_Ecommerce.DAL.DataSeeding;
 using Vts_Ecommerce.Middleware;
+using System.Data.Entity.Migrations;
+using Vts_Ecommerce.Migrations;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +28,23 @@ if (string.IsNullOrWhiteSpace(connectionString))
     throw new InvalidOperationException("DefaultConnection connection string not found in appsettings.json");
 }
 AdoHelper.Initialize(connectionString);
+
+// Run EF6 Migrations
+try
+{
+    Console.WriteLine("Applying EF6 Database Migrations...");
+    var configuration = new Vts_Ecommerce.Migrations.Configuration();
+    configuration.TargetDatabase = new System.Data.Entity.Infrastructure.DbConnectionInfo(connectionString, "System.Data.SqlClient");
+    var migrator = new DbMigrator(configuration);
+    migrator.Update();
+    Console.WriteLine("Migrations applied successfully.");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Error applying migrations: {ex.Message}");
+    // Do not rethrow, let the app try to continue or let the AdoHelper tests fail below
+}
+
 
 // Test database connection
 try
@@ -53,14 +73,16 @@ try
     {
         Console.WriteLine("Adding missing column 'SellingPrice' to Products table and migrating Price -> SellingPrice if present...");
         AdoHelper.ExecuteNonQuery("ALTER TABLE Products ADD SellingPrice DECIMAL(18,2) NOT NULL CONSTRAINT DF_Products_SellingPrice DEFAULT 0");
-        var priceExists = (int)AdoHelper.ExecuteScalar("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='Products' AND COLUMN_NAME='Price'");
-        if (priceExists > 0)
-        {
-            // migrate existing Price data into SellingPrice
-            AdoHelper.ExecuteNonQuery("UPDATE Products SET SellingPrice = Price WHERE SellingPrice = 0");
-            // Allow NULLs in legacy Price column to prevent INSERT errors when creating new products
-            AdoHelper.ExecuteNonQuery("ALTER TABLE Products ALTER COLUMN Price DECIMAL(18,2) NULL");
-        }
+    }
+
+    // Always ensure Price is nullable (legacy support)
+    var priceExists = (int)AdoHelper.ExecuteScalar("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='Products' AND COLUMN_NAME='Price'");
+    if (priceExists > 0)
+    {
+        // migrate existing Price data into SellingPrice if needed
+        AdoHelper.ExecuteNonQuery("UPDATE Products SET SellingPrice = Price WHERE SellingPrice = 0");
+        // Allow NULLs in legacy Price column to prevent INSERT errors when creating new products
+        AdoHelper.ExecuteNonQuery("ALTER TABLE Products ALTER COLUMN Price DECIMAL(18,2) NULL");
     }
 
     var notesExists = (int)AdoHelper.ExecuteScalar("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='Customers' AND COLUMN_NAME='Notes'");

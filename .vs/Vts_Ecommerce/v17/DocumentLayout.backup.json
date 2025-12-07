@@ -1,7 +1,36 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\tasks\\Vts_Ecommerce\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|d:\\tasks\\vts_ecommerce\\vts_ecommerce\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|solutionrelative:vts_ecommerce\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|d:\\tasks\\vts_ecommerce\\vts_ecommerce\\migrations\\202512031628023_initapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|solutionrelative:vts_ecommerce\\migrations\\202512031628023_initapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|d:\\tasks\\vts_ecommerce\\vts_ecommerce\\migrations\\202512071356065_adddddd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|solutionrelative:vts_ecommerce\\migrations\\202512071356065_adddddd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|d:\\tasks\\vts_ecommerce\\vts_ecommerce\\middleware\\sessionvalidationmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|solutionrelative:vts_ecommerce\\middleware\\sessionvalidationmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|d:\\tasks\\vts_ecommerce\\vts_ecommerce\\dal\\databaseconnectiontest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|solutionrelative:vts_ecommerce\\dal\\databaseconnectiontest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|d:\\tasks\\vts_ecommerce\\vts_ecommerce\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|solutionrelative:vts_ecommerce\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|d:\\tasks\\vts_ecommerce\\vts_ecommerce\\dal\\adohelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4444F93-8EBD-45CF-B6A7-15E28221A552}|Vts_Ecommerce\\Vts_Ecommerce.csproj|solutionrelative:vts_ecommerce\\dal\\adohelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +47,91 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\appsettings.json",
+              "RelativeDocumentMoniker": "Vts_Ecommerce\\appsettings.json",
+              "ToolTip": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\appsettings.json",
+              "RelativeToolTip": "Vts_Ecommerce\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-07T14:12:14.802Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "202512031628023_initapp.cs",
+              "DocumentMoniker": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\Migrations\\202512031628023_initapp.cs",
+              "RelativeDocumentMoniker": "Vts_Ecommerce\\Migrations\\202512031628023_initapp.cs",
+              "ToolTip": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\Migrations\\202512031628023_initapp.cs",
+              "RelativeToolTip": "Vts_Ecommerce\\Migrations\\202512031628023_initapp.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAA2wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T14:11:51.643Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "202512071356065_adddddd.cs",
+              "DocumentMoniker": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\Migrations\\202512071356065_adddddd.cs",
+              "RelativeDocumentMoniker": "Vts_Ecommerce\\Migrations\\202512071356065_adddddd.cs",
+              "ToolTip": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\Migrations\\202512071356065_adddddd.cs",
+              "RelativeToolTip": "Vts_Ecommerce\\Migrations\\202512071356065_adddddd.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T14:11:49.785Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SessionValidationMiddleware.cs",
+              "DocumentMoniker": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\Middleware\\SessionValidationMiddleware.cs",
+              "RelativeDocumentMoniker": "Vts_Ecommerce\\Middleware\\SessionValidationMiddleware.cs",
+              "ToolTip": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\Middleware\\SessionValidationMiddleware.cs",
+              "RelativeToolTip": "Vts_Ecommerce\\Middleware\\SessionValidationMiddleware.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T14:11:40.885Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\Program.cs",
+              "RelativeDocumentMoniker": "Vts_Ecommerce\\Program.cs",
+              "ToolTip": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\Program.cs",
+              "RelativeToolTip": "Vts_Ecommerce\\Program.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAhwB0AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T14:00:45.885Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DatabaseConnectionTest.cs",
+              "DocumentMoniker": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\DAL\\DatabaseConnectionTest.cs",
+              "RelativeDocumentMoniker": "Vts_Ecommerce\\DAL\\DatabaseConnectionTest.cs",
+              "ToolTip": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\DAL\\DatabaseConnectionTest.cs",
+              "RelativeToolTip": "Vts_Ecommerce\\DAL\\DatabaseConnectionTest.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAA2wA8AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T14:00:25.566Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AdoHelper.cs",
+              "DocumentMoniker": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\DAL\\AdoHelper.cs",
+              "RelativeDocumentMoniker": "Vts_Ecommerce\\DAL\\AdoHelper.cs",
+              "ToolTip": "D:\\tasks\\Vts_Ecommerce\\Vts_Ecommerce\\DAL\\AdoHelper.cs",
+              "RelativeToolTip": "Vts_Ecommerce\\DAL\\AdoHelper.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T13:59:49.366Z"
             }
           ]
         }

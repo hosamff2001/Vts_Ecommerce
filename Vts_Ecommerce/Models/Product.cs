@@ -43,7 +43,7 @@ namespace Vts_Ecommerce.Models
         public virtual Category? Category { get; set; }
 
         public virtual ICollection<SalesInvoiceItem>? InvoiceItems { get; set; }
-        public decimal Price { get; internal set; }
+        public decimal Price { get; set; }
     }
 }
 
