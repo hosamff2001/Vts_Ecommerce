@@ -26,7 +26,7 @@ namespace Vts_Ecommerce.DAL.Repositories
                 INSERT INTO Categories (Name, Description, IsActive)
                 VALUES (@Name, @Description, @IsActive);
                 SELECT SCOPE_IDENTITY();";
-
+// "InsertOnCategory((@Name, @Description, @IsActive))"
             var parameters = new[]
             {
                 AdoHelper.CreateParameter("@Name", category.Name, SqlDbType.NVarChar, 100),

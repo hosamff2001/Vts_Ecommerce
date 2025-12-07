@@ -141,35 +141,7 @@ namespace Vts_Ecommerce.DAL
             return parameter;
         }
 
-        /// <summary>
-        /// Create output parameter
-        /// </summary>
-        public static SqlParameter CreateOutputParameter(string parameterName, SqlDbType dbType)
-        {
-            if (!parameterName.StartsWith("@"))
-            {
-                parameterName = "@" + parameterName;
-            }
-
-            var parameter = new SqlParameter(parameterName, dbType)
-            {
-                Direction = ParameterDirection.Output
-            };
-            return parameter;
-        }
-
-        /// <summary>
-        /// Map SqlDataReader columns to a dictionary of column name to value
-        /// </summary>
-        public static Dictionary<string, object> MapReaderRow(SqlDataReader reader)
-        {
-            var row = new Dictionary<string, object>();
-            for (int i = 0; i < reader.FieldCount; i++)
-            {
-                row[reader.GetName(i)] = reader.IsDBNull(i) ? null : reader.GetValue(i);
-            }
-            return row;
-        }
+     
     }
 }
 
