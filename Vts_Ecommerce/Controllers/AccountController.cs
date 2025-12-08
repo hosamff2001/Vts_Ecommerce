@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System;
 using Vts_Ecommerce.DAL.Repositories;
+using Vts_Ecommerce.Models;
 using Vts_Ecommerce.Helpers;
 
 namespace Vts_Ecommerce.Controllers
@@ -44,6 +45,17 @@ namespace Vts_Ecommerce.Controllers
                 if (decrypted != password)
                 {
                     ViewBag.Error = "Invalid username or password.";
+                    return View();
+                }
+
+                // Check for existing active session
+                var sessionRepo = new UserSessionRepository();
+                var activeSession = sessionRepo.GetActiveByUserId(user.Id);
+
+                // If active session exists and was active within last 20 minutes, block login
+                if (activeSession != null && activeSession.LastActivityTime > DateTime.Now.AddMinutes(-20))
+                {
+                    ViewBag.Error = "User is already active in another session.";
                     return View();
                 }
 

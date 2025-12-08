@@ -13,7 +13,7 @@ namespace Vts_Ecommerce.Controllers
 
         public IActionResult Index()
         {
-            var products = _productRepo.GetAll();
+            var products = _productRepo.GetAll(activeOnly: false);
             return View(products);
         }
 
